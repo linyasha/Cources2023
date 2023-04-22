@@ -8,10 +8,10 @@ package dev.lynko.cources2023
  * и пишем функцию экстеншен на лист, которая заменяет каждый i-й элемент номером телефона
  */
 
-// TODO 1: make maxLength const that is visible only inside the Person class
+// TODO 1: Сделать maxLength const, которая будет видна только внутри класса Person
 val maxLength = 12
 
-// TODO 2: make companionConstant part of companion object
+// TODO 2: Сделать companionConstant частью companion object
 val companionConstant = 12
 
 class Person(phoneCode: String) {
@@ -22,9 +22,7 @@ class Person(phoneCode: String) {
         // TODO 2
     }
 
-    // * * * Bonus task * * * (work on home)
-
-    //TODO 3: make this fun as extension to a list outside the Person class
+    //TODO 3: Сделай эту функцию расширением листа вне класса Person
     private fun replacePlacesWithThePhoneCode(list: List<Any>, placeNum: Int = 3): List<Any> {
         return list.mapIndexed { index, any -> if (index % placeNum == 0) code else any}
     }
@@ -36,10 +34,10 @@ fun main(){
     val p = Person("45-45-45")
 
 
-    // TODO: uncomment after finishing TODO 1
+    // TODO 4: Раскомментируй это после выполнения TODO 1
     //  println(Person.maxLength)
 
-    //TODO *: uncomment after doing function
-    // lst.replacePlacesWithThePhoneCode(p, 4)
+    //TODO 5: Раскомментируй это после выполнения TODO 3
+    // list.replacePlacesWithThePhoneCode(p, 4)
 }
 
