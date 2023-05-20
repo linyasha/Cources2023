@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MyStyle">
+        <item name="android:textColor">@color/purple_200</item>
+    </style>
+
+
+    <style name="Base">
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="Base.BaseTextBlack">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>

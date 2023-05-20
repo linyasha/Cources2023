@@ -11,6 +11,16 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="myAtribty">@color/black</item>
         <!-- Customize your theme here. -->
     </style>
+
+
+
+    <style name="MainActivity">
+        <item name="windowActionBar"></item>
+    </style>
+
+
+
 </resources>
