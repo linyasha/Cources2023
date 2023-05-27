@@ -7,4 +7,12 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    
+    //MainScreen
+    <color name="movie_details_background">#191926</color>
+    <color name="name_of_category">#FF3466</color>
+    <color name="movie_title">#ECECEC</color>
+    <color name="review_count">#6D6D80</color>
+    <color name="actor_name">#D8D8D8</color>
 </resources>
+

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BackButton">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:alpha">0.5</item>
+    </style>
+
+    <style name="MovieTitle">
+        <item name="android:textColor">@color/movie_title</item>
+        <item name="android:textSize">40sp</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="AgeText">
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="ReviewsCount">
+        <item name="android:gravity">start</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textColor">@color/review_count</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="SubTitleMovies">
+        <item name="android:textColor">@color/movie_title</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ActorName">
+        <item name="android:textColor">@color/actor_name</item>
+        <item name="fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:maxLines">2</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+
+
+</resources>
