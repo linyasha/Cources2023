@@ -8,7 +8,6 @@ import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toolbar
-import com.bumptech.glide.Glide
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -17,17 +16,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        /*
-
-        tv1.visibility = View.GONE
-        tv2.visibility = View.GONE
-        tv3.visibility = View.GONE
-
-        textViews.visibility = View.GONE
-
-
-         */
 
     }
 
