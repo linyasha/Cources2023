@@ -8,6 +8,8 @@ import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toolbar
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
@@ -16,7 +18,9 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
+        lifecycleScope.launch {
+            
+        }
     }
 
 }
