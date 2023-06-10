@@ -9,6 +9,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import android.widget.Toolbar
+import androidx.core.widget.addTextChangedListener
+import dev.lynko.cources2023.databinding.ActivityMainBinding
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Completable
@@ -97,5 +99,34 @@ class MainActivity : AppCompatActivity() {
     companion object {
         val TAG = "d_MainActivity"
     }
+
+
+    /*
+    val userQuery = Flowable.create({ emiter ->
+        binding.textInputEditText.addTextChangedListener { userText ->
+            emiter.onNext(userText.toString())
+        }
+    }, BackpressureStrategy.LATEST)
+
+    private lateinit var binding: ActivityMainBinding
+
+    @SuppressLint("MissingInflatedId")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        userQuery
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .observeOn(Schedulers.io())
+            .subscribe {
+
+                Log.d(TAG, "Current user input: [$it] ")
+            }
+    }
+
+    companion object {
+        val TAG = "d_MainActivity"
+    }
+     */
 
 }
