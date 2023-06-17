@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         val cursorAdapter = CursorAdapterExample(this@MainActivity, database.getCursorWithTopics())
 
         binding.listView.apply {
-            adapter = cursorAdapter
+            adapter = arrayAdapter
         }
     }
 }

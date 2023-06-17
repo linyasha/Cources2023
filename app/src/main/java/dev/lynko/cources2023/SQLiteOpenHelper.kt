@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
 internal const val TOPIC_COLUMN = "TOPIC_NAME"
-
 private const val LOG_TAG = "SQLiteOpenHelper"
 private const val DATABASE_NAME = "IT_ACADEMY_ANDROID"
 private const val TABLE_NAME = "android_table"
@@ -44,14 +43,16 @@ class SQLiteOpenHelper(context: Context) : SQLiteOpenHelper(
 
     fun getListOfTopics(): List<String> {
         val listOfTopics = mutableListOf<String>()
-        val cursor = getCursorWithTopics()
-        if (cursor.moveToFirst()) {
-            do {
-                val topicName = cursor.getString(cursor.getColumnIndex(TOPIC_COLUMN) ?: 0)
-                listOfTopics.add("From list: $topicName")
-            } while (cursor.moveToNext())
+        getCursorWithTopics().use { cursor ->
+            if (cursor.moveToFirst()) {
+                do {
+                    val topicName = cursor.getString(
+                        cursor.getColumnIndex(TOPIC_COLUMN) ?: 0
+                    )
+                    listOfTopics.add("From list: $topicName")
+                } while (cursor.moveToNext())
+            }
         }
-        cursor.close()
         return listOfTopics
     }
 }
