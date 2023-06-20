@@ -1,27 +1,28 @@
-package dev.lynko.cources2023
+package dev.lynko.cources2023.ui.activity
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.util.Log
-import android.widget.Button
-import android.widget.Toolbar
+import android.widget.Toast
+import androidx.lifecycle.ViewModelProvider
+import dev.lynko.cources2023.MyAnimalsApp
 import dev.lynko.cources2023.databinding.ActivityMainBinding
 import dev.lynko.cources2023.model.Animal
+import dev.lynko.cources2023.model.ValidateState
 import dev.lynko.cources2023.repository.AnimalsRepository
+import dev.lynko.cources2023.ui.activity.viewModel.AnimalsViewModel
+import dev.lynko.cources2023.ui.activity.viewModel.AnimalsViewModelFactory
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class AnimalsActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var animalsRepository: AnimalsRepository
+    private lateinit var viewModel: AnimalsViewModel
 
     //TODO(Данное активити должно содержать два фрагмента, AnimalsFragment и AddAnimalFragment.
     // AnimalsFragment устанавливается по умолчанию, и содержит в себе RecyclerView, в котором будут
@@ -37,43 +38,47 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        animalsRepository = AnimalsRepository(MyAnimalsApp.INSTANCE.database.animalsDao())
-
+        viewModel = ViewModelProvider(this, AnimalsViewModelFactory(
+            AnimalsRepository(MyAnimalsApp.INSTANCE.database.animalsDao())
+        )).get(AnimalsViewModel::class.java)
+        viewModel.animals.observe(this) { animals ->
+            Log.d("HAHAH", "observe: $animals ")
+            binding.result.setText(animals.toString())
+        }
+        viewModel.state.observe(this) { status ->
+            with(binding) {
+                when(status) {
+                    ValidateState.SUCCESS -> {
+                        nameEditText.setText("")
+                        ageEditText.setText("")
+                        weightEditText.setText("")
+                    }
+                    ValidateState.FAIL -> {
+                        Toast.makeText(this@AnimalsActivity, "Check data!", Toast.LENGTH_SHORT).show()
+                    }
+                    ValidateState.DEFAULT -> {}
+                }
+            }
+        }
         with(binding) {
             //TODO(Перенесите в AddAnimalFragment)
             add.setOnClickListener {
-                val name = nameEditText.run {
-                    val textVar = text.toString()
-                    text?.clear()
-                    textVar
-                }
-
-                val age = ageEditText.run {
-                    val textVar = text.toString()
-                    text?.clear()
-                    textVar.toInt()
-                }
-                val weight = weightEditText.run {
-                    val textVar = text.toString()
-                    text?.clear()
-                    textVar.toDouble()
-                }
-                val type = Animal.TYPE_CAT
-//              TODO("Поменяйте на lifecycleScope")
-                GlobalScope.launch(Dispatchers.IO) {
-                    animalsRepository.insertAnimal(Animal(type, name, age, weight))
-                }
-
+                viewModel.insertAnimal(
+                    nameEditText.text.toString(),
+                    ageEditText.text.toString(),
+                    weightEditText.text.toString(),
+                    Animal.TYPE_CAT
+                )
             }
             //TODO("Поменяйте на lifecycleScope")
-            GlobalScope.launch(Dispatchers.IO) {
-                val animals = animalsRepository.getAllAnimas()
-                withContext(Dispatchers.Main) {
-                    //TODO(Список откравляется в adapter RecyclerView(как в примере, который мы рассматривали,
-                    // когда изучали его))
-                    binding.result.setText(animals.toString())
-                }
-            }
+//            GlobalScope.launch(Dispatchers.IO) {
+////                val animals = animalsRepository.getAllAnimas()
+//                withContext(Dispatchers.Main) {
+//                    //TODO(Список откравляется в adapter RecyclerView(как в примере, который мы рассматривали,
+//                    // когда изучали его))
+////                    binding.result.setText(animals.toString())
+//                }
+//            }
 
         }
     }

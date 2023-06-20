@@ -4,7 +4,7 @@ import dev.lynko.cources2023.database.dao.AnimalsDao
 import dev.lynko.cources2023.model.Animal
 import kotlinx.coroutines.*
 
-class AnimalsRepository(val animalsDao: AnimalsDao) {
+class AnimalsRepository(private val animalsDao: AnimalsDao) {
 
     private val job = SupervisorJob()
     private val animalsScope = CoroutineScope(job + Dispatchers.IO)
@@ -21,6 +21,9 @@ class AnimalsRepository(val animalsDao: AnimalsDao) {
             animalsDao.getAll()
         }.await()
     }
+
+    fun getAllAnimasLiveData() = animalsDao.getAllLiveData()
+
 
     //TODO(Добавьте метод deleteAll, который будет полностью удалять всех питомцев из таблицы. Пока
     // его можно не вызывать, поработаем с ним позже)
