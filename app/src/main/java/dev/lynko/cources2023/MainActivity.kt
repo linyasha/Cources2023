@@ -23,6 +23,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var animalsRepository: AnimalsRepository
 
+    //TODO(Данное активити должно содержать два фрагмента, AnimalsFragment и AddAnimalFragment.
+    // AnimalsFragment устанавливается по умолчанию, и содержит в себе RecyclerView, в котором будут
+    // отображаться все добавленные питомцы(пока что будет достаточно просто при создании фрагмента
+    // получать их их базы и заполнять recyclerView).
+    // Так же AnimalsFragment содержит в себе две кнопки (пример их расположения будет на скриншоте),
+    // по нажатию на Fab в нижнем правом углу должен открываться AddAnimalFragment(UI тоже будет на скриншоте),
+    // в котором будут заполняться все необходимые данные и по нажатию на кнопку, сохраняться в базу данных)
+
+    //TODO(Цвета и стили в UI необязательно делать как на скринах, проявите творчество))
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,8 +39,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         animalsRepository = AnimalsRepository(MyAnimalsApp.INSTANCE.database.animalsDao())
 
-
         with(binding) {
+            //TODO(Перенесите в AddAnimalFragment)
             add.setOnClickListener {
                 val name = nameEditText.run {
                     val textVar = text.toString()
@@ -50,24 +59,22 @@ class MainActivity : AppCompatActivity() {
                     textVar.toDouble()
                 }
                 val type = Animal.TYPE_CAT
-//                TODO("Change to lifecycleScope")
+//              TODO("Поменяйте на lifecycleScope")
                 GlobalScope.launch(Dispatchers.IO) {
                     animalsRepository.insertAnimal(Animal(type, name, age, weight))
                 }
 
             }
-            get.setOnClickListener {
-                //TODO("Change to lifecycleScope")
-                GlobalScope.launch(Dispatchers.IO) {
-                    val animals = animalsRepository.getAllAnimas()
-                    withContext(Dispatchers.Main) {
-                        binding.result.setText(animals.toString())
-                    }
+            //TODO("Поменяйте на lifecycleScope")
+            GlobalScope.launch(Dispatchers.IO) {
+                val animals = animalsRepository.getAllAnimas()
+                withContext(Dispatchers.Main) {
+                    //TODO(Список откравляется в adapter RecyclerView(как в примере, который мы рассматривали,
+                    // когда изучали его))
+                    binding.result.setText(animals.toString())
                 }
             }
+
         }
-
-
     }
-
 }

@@ -21,4 +21,7 @@ class AnimalsRepository(val animalsDao: AnimalsDao) {
             animalsDao.getAll()
         }.await()
     }
+
+    //TODO(Добавьте метод deleteAll, который будет полностью удалять всех питомцев из таблицы. Пока
+    // его можно не вызывать, поработаем с ним позже)
 }
