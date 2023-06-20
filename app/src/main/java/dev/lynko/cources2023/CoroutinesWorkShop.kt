@@ -7,7 +7,7 @@ import kotlin.random.nextInt
 //TODO 1 Создайте и сохраните в переменную coroutineScope, который по умолчанию будет использотвать
 // Dispatcher.IO
 
-//val myСoroutineScope =
+val myСoroutineScope = CoroutineScope(Dispatchers.IO)
 
 fun main()  {
     //  TODO 2 Запустите корутину в созданном coroutineScope.
@@ -27,15 +27,23 @@ fun main()  {
     // раскомментируйте  delay(10_000L) и после него проверьте с помощью job активна ли созданная
     // корутина, и если активна, завершите ее вручную
 
-//    val job = myСoroutineScope.
-        println("Coroutine TODO 3 start")
-
-        println("Coroutine TODO 3 end")
-//    }
-//    delay(10_000)
-//    if (job.) {
-//        job.
-//    }
+    //Exception's
+    val result = myСoroutineScope.launch {
+        val job = myСoroutineScope.launch {
+            println("Coroutine TODO 3 start")
+            delay(5000L)
+            println("Coroutine TODO 3 end")
+            try {
+                throw NoSuchMethodError("Hello")
+            } catch (e: Exception) {
+                println(e.message)
+            }
+        }
+        delay(20_000)
+        if (job.isActive) {
+            job.cancel()
+        }
+    }
 
 
     //TODO 4 Исправьте написанный код в корутине так, чтобы добиться вывода текста в таком порядке:
@@ -63,13 +71,13 @@ fun main()  {
         }
         println("Coroutine TODO 4 end")
     }
-
+*/
     //Не убирать
-    while (jobFinal.isActive) {
+    while (result.isActive) {
 
     }
 
-     */
+
 }
 
 suspend fun getRandomNumber(): Int = Random(System.currentTimeMillis()).nextInt(0..20)
