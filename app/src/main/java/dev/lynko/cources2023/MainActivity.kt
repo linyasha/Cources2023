@@ -41,30 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         with(binding) {
             //TODO(Перенесите в AddAnimalFragment)
-            add.setOnClickListener {
-                val name = nameEditText.run {
-                    val textVar = text.toString()
-                    text?.clear()
-                    textVar
-                }
 
-                val age = ageEditText.run {
-                    val textVar = text.toString()
-                    text?.clear()
-                    textVar.toInt()
-                }
-                val weight = weightEditText.run {
-                    val textVar = text.toString()
-                    text?.clear()
-                    textVar.toDouble()
-                }
-                val type = Animal.TYPE_CAT
-//              TODO("Поменяйте на lifecycleScope")
-                GlobalScope.launch(Dispatchers.IO) {
-                    animalsRepository.insertAnimal(Animal(type, name, age, weight))
-                }
-
-            }
             //TODO("Поменяйте на lifecycleScope")
             GlobalScope.launch(Dispatchers.IO) {
                 val animals = animalsRepository.getAllAnimas()

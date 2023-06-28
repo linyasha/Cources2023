@@ -18,4 +18,6 @@ interface AnimalsDao {
     @Query("DELETE FROM animal WHERE id = :id")
     fun deleteAnimal(id: Int)
 
+    @Query("DELETE FROM animal")
+    fun deleteAll()
 }
