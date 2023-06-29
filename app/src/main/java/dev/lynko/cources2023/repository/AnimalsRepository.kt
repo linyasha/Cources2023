@@ -22,9 +22,6 @@ class AnimalsRepository(val animalsDao: AnimalsDao) {
         }.await()
     }
 
-    //TODO(Добавьте метод deleteAll, который будет полностью удалять всех питомцев из таблицы. Пока
-    // его можно не вызывать, поработаем с ним позже)
-
     suspend fun deleteAll(){
         animalsScope.launch {
             animalsDao.deleteAll()

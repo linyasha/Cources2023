@@ -8,6 +8,7 @@ import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toolbar
+import androidx.fragment.app.FragmentManager
 import dev.lynko.cources2023.databinding.ActivityMainBinding
 import dev.lynko.cources2023.model.Animal
 import dev.lynko.cources2023.repository.AnimalsRepository
@@ -31,7 +32,6 @@ class MainActivity : AppCompatActivity() {
     // по нажатию на Fab в нижнем правом углу должен открываться AddAnimalFragment(UI тоже будет на скриншоте),
     // в котором будут заполняться все необходимые данные и по нажатию на кнопку, сохраняться в базу данных)
 
-    //TODO(Цвета и стили в UI необязательно делать как на скринах, проявите творчество))
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,9 +39,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         animalsRepository = AnimalsRepository(MyAnimalsApp.INSTANCE.database.animalsDao())
 
-        with(binding) {
-            //TODO(Перенесите в AddAnimalFragment)
+        supportFragmentManager.beginTransaction()
+            .add(binding.containerMain.id, FragmentAnimals.newInstance())
 
+        with(binding) {
             //TODO("Поменяйте на lifecycleScope")
             GlobalScope.launch(Dispatchers.IO) {
                 val animals = animalsRepository.getAllAnimas()
