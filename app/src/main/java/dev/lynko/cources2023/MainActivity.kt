@@ -9,6 +9,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.Toolbar
 import androidx.fragment.app.FragmentManager
+import androidx.lifecycle.LifecycleCoroutineScope
+import androidx.lifecycle.lifecycleScope
 import dev.lynko.cources2023.databinding.ActivityMainBinding
 import dev.lynko.cources2023.model.Animal
 import dev.lynko.cources2023.repository.AnimalsRepository
@@ -16,8 +18,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import javax.xml.datatype.DatatypeFactory.newInstance
 import kotlin.random.Random
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
@@ -40,15 +42,16 @@ class MainActivity : AppCompatActivity() {
         animalsRepository = AnimalsRepository(MyAnimalsApp.INSTANCE.database.animalsDao())
 
         supportFragmentManager.beginTransaction()
-            .add(binding.containerMain.id, FragmentAnimals.newInstance())
+            .add(binding.containerMain.id, FragmentAnimals.newInstance(), "tag")
+            .commit()
 
         with(binding) {
-            //TODO("Поменяйте на lifecycleScope")
-            GlobalScope.launch(Dispatchers.IO) {
+            lifecycleScope.launch(Dispatchers.IO) {
                 val animals = animalsRepository.getAllAnimas()
                 withContext(Dispatchers.Main) {
                     //TODO(Список откравляется в adapter RecyclerView(как в примере, который мы рассматривали,
                     // когда изучали его))
+
                     binding.result.setText(animals.toString())
                 }
             }

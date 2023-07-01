@@ -23,7 +23,7 @@ data class Animal(
     companion object {
         const val TYPE_CAT: Byte = 1
         const val TYPE_DOG: Byte = 2
-        const val TYPE_ANDROID: Byte = 3
+        const val TYPE_ANDROID: Byte = 0
 
     }
 }

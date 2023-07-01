@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import dev.lynko.cources2023.databinding.FragmentAnimalsBinding
 
-class FragmentAnimals : Fragment() {
+class FragmentAnimals : Fragment(), ClickDelegate {
 
     private lateinit var binding: FragmentAnimalsBinding
 
@@ -22,6 +22,8 @@ class FragmentAnimals : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         binding.floatingActionButton.setOnClickListener {
 
             val intent = Intent (context, FragmentAddAnimal::class.java)
@@ -29,12 +31,8 @@ class FragmentAnimals : Fragment() {
         }
 
     }
-    companion object {
 
-        @JvmStatic
-        fun newInstance() =
-            FragmentAnimals().apply {
-                }
-            }
+    override fun onAnimalClick(id: Int) {
     }
+
 }

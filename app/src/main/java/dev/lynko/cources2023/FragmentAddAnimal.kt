@@ -8,6 +8,7 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.lifecycle.lifecycleScope
 import dev.lynko.cources2023.databinding.FragmentAddAnimalBinding
 import dev.lynko.cources2023.model.Animal
 import dev.lynko.cources2023.repository.AnimalsRepository
@@ -56,8 +57,7 @@ class FragmentAddAnimal : Fragment(), PopupMenu.OnMenuItemClickListener {
                     textVar
                 }
                 val createdAt = System.currentTimeMillis()
-//              TODO("Поменяйте на lifecycleScope")
-                GlobalScope.launch(Dispatchers.IO) {
+                lifecycleScope.launch(Dispatchers.IO) {
                     animalsRepository.insertAnimal(Animal(type, name, age, weight, description, createdAt ))
                 }
 
