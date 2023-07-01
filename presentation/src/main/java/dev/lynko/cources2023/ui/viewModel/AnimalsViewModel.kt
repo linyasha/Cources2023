@@ -20,7 +20,8 @@ import kotlinx.coroutines.launch
 class AnimalsViewModel(
     private val getAnimalUseCase: GetAllAnimalsUseCase,
     private val getFlowAnimalUseCase: GetFlowAnimalsUseCase,
-    private val insertAnimalUseCase: InsertAnimalUseCase
+    private val insertAnimalUseCase: InsertAnimalUseCase,
+    private val accountId: Int
     ): ViewModel() {
 
     private val _state: MutableLiveData<ValidateState> = MutableLiveData(ValidateState.DEFAULT)
@@ -61,22 +62,5 @@ class AnimalsViewModel(
             _state.value = ValidateState.FAIL
             null
         }
-    }
-}
-
-class AnimalsViewModelFactory(
-    private val getAnimalUseCase: GetAllAnimalsUseCase,
-    private val getFlowAnimalUseCase: GetFlowAnimalsUseCase,
-    private val insertAnimalUseCase: InsertAnimalUseCase,
-    ): ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(AnimalsViewModel::class.java)) {
-            return AnimalsViewModel(
-                getAnimalUseCase,
-                getFlowAnimalUseCase,
-                insertAnimalUseCase
-            ) as T
-        }
-        throw IllegalArgumentException("Unknown viewModel!")
     }
 }

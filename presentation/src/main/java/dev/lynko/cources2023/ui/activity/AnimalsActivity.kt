@@ -10,43 +10,30 @@ import androidx.lifecycle.lifecycleScope
 import dev.lynko.cources2023.MyAnimalsApp
 import dev.lynko.cources2023.databinding.ActivityMainBinding
 import dev.lynko.cources2023.ui.model.ValidateState
-import dev.lynko.data.repository.AnimalsRepositoryImpl
+
 import dev.lynko.cources2023.ui.viewModel.AnimalsViewModel
-import dev.lynko.cources2023.ui.viewModel.AnimalsViewModelFactory
 import dev.lynko.domain.models.Animal
-import dev.lynko.domain.usecases.GetAllAnimalsUseCase
-import dev.lynko.domain.usecases.GetFlowAnimalsUseCase
-import dev.lynko.domain.usecases.InsertAnimalUseCase
+
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
-import org.koin.core.component.inject
+import org.koin.core.parameter.parametersOf
 
 
 class AnimalsActivity : AppCompatActivity(), KoinComponent {
 
     private lateinit var binding: ActivityMainBinding
-
-    private lateinit var viewModel: AnimalsViewModel
-
-
-
-    private val getAllAnimalUseCase: GetAllAnimalsUseCase by inject()
-
-    private val insertAnimalUseCase: InsertAnimalUseCase by inject()
-
-    private val getFlowAnimalsUseCase: GetFlowAnimalsUseCase by inject()
+    private val viewModel: AnimalsViewModel by viewModel {
+        val accountId = intent.extras?.getInt("KEY_ACCOUNT_ID", 0)
+        parametersOf(accountId)
+    }
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModel = ViewModelProvider(this, AnimalsViewModelFactory(
-            getAllAnimalUseCase,
-            getFlowAnimalsUseCase,
-            insertAnimalUseCase
-        )).get(AnimalsViewModel::class.java)
         lifecycleScope.launch {
             viewModel.animals.collectLatest { animals ->
                 Log.d("HAHAH", "observe: $animals ")
