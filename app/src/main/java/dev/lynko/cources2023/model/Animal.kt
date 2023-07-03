@@ -3,6 +3,7 @@ package dev.lynko.cources2023.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
 @Entity(
     tableName = "animal"
@@ -13,8 +14,8 @@ data class Animal(
     val age: Int,
 //    @ColumnInfo(name = "w")
     val weight: Double,
-    //TODO("Добавьте поле description, которое будет содержать описание питомца")
-    //TODO("Добавьте поле createdAt, которое будет равно времени создания питомца(System.currentTimeMillis)")
+    val description: String,
+    val createdAt: Long,
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 ) {
@@ -22,7 +23,7 @@ data class Animal(
     companion object {
         const val TYPE_CAT: Byte = 1
         const val TYPE_DOG: Byte = 2
-        const val TYPE_ANDROID: Byte = 3
+        const val TYPE_ANDROID: Byte = 0
 
     }
 }
