@@ -6,11 +6,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import dev.lynko.cources2023.databinding.FragmentAnimalsBinding
+import dev.lynko.cources2023.repository.AnimalsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class FragmentAnimals : Fragment(), ClickDelegate {
 
     private lateinit var binding: FragmentAnimalsBinding
+    private lateinit var animalsRepository: AnimalsRepository
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,14 +29,26 @@ class FragmentAnimals : Fragment(), ClickDelegate {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        animalsRepository = AnimalsRepository(MyAnimalsApp.INSTANCE.database.animalsDao())
+        val adapter = MyAdapter(this)
 
+        with(binding) {
+            floatingActionButton.setOnClickListener {
+                val intent = Intent (requireContext(), FragmentAddAnimal::class.java)
+                startActivity(intent)
+            }
 
-        binding.floatingActionButton.setOnClickListener {
+            RecyclerView.layoutManager = LinearLayoutManager(this@FragmentAnimals)
+            RecyclerView.adapter = adapter
+            RecyclerView.setItemViewCacheSize(3)
 
-            val intent = Intent (context, FragmentAddAnimal::class.java)
-            startActivity(intent)
+            lifecycleScope.launch(Dispatchers.IO) {
+                val animals = animalsRepository.getAllAnimas()
+                withContext(Dispatchers.Main) {
+                    adapter.setData(animals)
+                }
+            }
         }
-
     }
 
     override fun onAnimalClick(id: Int) {

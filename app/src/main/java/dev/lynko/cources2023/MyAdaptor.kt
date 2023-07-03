@@ -8,9 +8,9 @@ import dev.lynko.cources2023.databinding.ItemAnimalBinding
 import dev.lynko.cources2023.model.Animal
 import java.util.*
 
-class MyRecyclerViewAdapter(
+class MyAdapter(
     private val delegate: ClickDelegate
-) : RecyclerView.Adapter<MyRecyclerViewAdapter.MyViewHolder>() {
+) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     private var animalList: MutableList<Animal> = mutableListOf()
 
