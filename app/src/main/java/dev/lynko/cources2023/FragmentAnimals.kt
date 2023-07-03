@@ -38,7 +38,7 @@ class FragmentAnimals : Fragment(), ClickDelegate {
                 startActivity(intent)
             }
 
-            RecyclerView.layoutManager = LinearLayoutManager(this@FragmentAnimals)
+            RecyclerView.layoutManager = LinearLayoutManager(this@FragmentAnimals.context)
             RecyclerView.adapter = adapter
             RecyclerView.setItemViewCacheSize(3)
 
@@ -54,4 +54,9 @@ class FragmentAnimals : Fragment(), ClickDelegate {
     override fun onAnimalClick(id: Int) {
     }
 
+//    companion object{
+//        @JvmStatic
+//        fun newInstance() {
+//        }
+//    }
 }
