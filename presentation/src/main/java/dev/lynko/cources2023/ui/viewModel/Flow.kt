@@ -36,3 +36,16 @@ suspend fun getData(): Flow<Int> = flow<Int> {
         }
     }
 }
+
+//flowOf
+//count, take, first, last, drop, single
+//map, transform(emit)
+//filter, takeWhile, dropWhile
+//reduce{a, b} fold{init, {a, b}}
+//zip
+//StateFlow, SharedFlow
+//public fun  MutableSharedFlow(
+//    replay: Int = 0, // 1
+//    extraBufferCapacity: Int = 0, // 2
+//    onBufferOverflow: BufferOverflow = BufferOverflow.SUSPEND // 3
+//): MutableSharedFlow
