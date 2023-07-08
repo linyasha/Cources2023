@@ -95,4 +95,13 @@ class FragmentAddAnimal : Fragment(), PopupMenu.OnMenuItemClickListener {
         binding.popup.text = item.title
         return true
     }
+
+    companion object{
+        @JvmStatic
+        fun newInstance() =
+            FragmentAnimals().apply{
+                arguments = Bundle().apply {  }
+            }
+
+    }
 }

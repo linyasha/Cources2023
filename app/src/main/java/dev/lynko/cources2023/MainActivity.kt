@@ -12,7 +12,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         supportFragmentManager.beginTransaction()
-            .add(binding.containerMain.id, FragmentAnimals.newInstance(), "tag")
+            .add(binding.containerMain.id, FragmentAnimals.newInstance(), TAG)
             .commit()
+    }
+    companion object {
+        const val TAG = "151"
     }
 }

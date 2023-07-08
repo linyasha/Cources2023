@@ -34,9 +34,13 @@ class FragmentAnimals : Fragment(), ClickDelegate {
 
         with(binding) {
             floatingActionButton.setOnClickListener {
-                val intent = Intent (requireContext(), FragmentAddAnimal::class.java)
-                startActivity(intent)
+//                requireActivity().supportFragmentManager.beginTransaction()
+//                    .add(, FragmentAddAnimal.newInstance(), TAG)
+//                    .commit()
+//                val intent = Intent (requireContext(), FragmentAddAnimal::class.java)
+//                startActivity(intent)
             }
+
 
             RecyclerView.layoutManager = LinearLayoutManager(this@FragmentAnimals.context)
             RecyclerView.adapter = adapter
@@ -54,9 +58,14 @@ class FragmentAnimals : Fragment(), ClickDelegate {
     override fun onAnimalClick(id: Int) {
     }
 
-//    companion object{
-//        @JvmStatic
-//        fun newInstance() {
-//        }
-//    }
+    companion object{
+
+        const val TAG = "152"
+        @JvmStatic
+        fun newInstance() =
+            FragmentAnimals().apply{
+                arguments = Bundle().apply {  }
+            }
+
+    }
 }
