@@ -2,6 +2,7 @@ package dev.lynko.cources2023
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import dev.lynko.cources2023.databinding.ActivityMainBinding
 import javax.xml.datatype.DatatypeFactory.newInstance
 class MainActivity : AppCompatActivity() {
@@ -15,6 +16,13 @@ class MainActivity : AppCompatActivity() {
             .add(binding.containerMain.id, FragmentAnimals.newInstance(), TAG)
             .commit()
     }
+
+    fun changeFragment(fragment: Fragment){
+        supportFragmentManager.beginTransaction()
+            .add(binding.containerMain.id, fragment, TAG)
+            .commit()
+    }
+
     companion object {
         const val TAG = "151"
     }
