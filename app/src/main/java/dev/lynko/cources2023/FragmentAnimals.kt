@@ -31,15 +31,11 @@ class FragmentAnimals : Fragment(), ClickDelegate {
         super.onViewCreated(view, savedInstanceState)
         animalsRepository = AnimalsRepository(MyAnimalsApp.INSTANCE.database.animalsDao())
         val adapter = MyAdapter(this)
-        val activity = activity as? MainActivity
         with(binding) {
             floatingActionButton.setOnClickListener {
-                activity?.let {
-                   val  bindingMain = ActivityMainBinding.bind((it.findViewById(android.R.id.content)))
-                    parentFragmentManager.beginTransaction()
-                        .add(bindingMain.containerMain.id, FragmentAddAnimal.newInstance(), TAG)
-                        .commit()
-                }
+                parentFragmentManager.beginTransaction()
+                    .add(ActivityMainBinding.bind(it.findViewById(R.id.container_main)).containerMain.id, FragmentAddAnimal.newInstance(), TAG)
+                    .commit()
             }
 
 
