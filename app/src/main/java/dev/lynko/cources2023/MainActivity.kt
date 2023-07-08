@@ -17,12 +17,6 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun changeFragment(fragment: Fragment){
-        supportFragmentManager.beginTransaction()
-            .add(binding.containerMain.id, fragment, TAG)
-            .commit()
-    }
-
     companion object {
         const val TAG = "151"
     }

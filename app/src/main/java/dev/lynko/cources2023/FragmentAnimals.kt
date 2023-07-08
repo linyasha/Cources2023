@@ -5,9 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import dev.lynko.cources2023.databinding.ActivityMainBinding
 import dev.lynko.cources2023.databinding.FragmentAnimalsBinding
 import dev.lynko.cources2023.repository.AnimalsRepository
 import kotlinx.coroutines.Dispatchers
@@ -31,11 +31,15 @@ class FragmentAnimals : Fragment(), ClickDelegate {
         super.onViewCreated(view, savedInstanceState)
         animalsRepository = AnimalsRepository(MyAnimalsApp.INSTANCE.database.animalsDao())
         val adapter = MyAdapter(this)
-
+        val activity = activity as? MainActivity
         with(binding) {
             floatingActionButton.setOnClickListener {
-                (requireActivity() as? MainActivity)?.changeFragment(FragmentAddAnimal.newInstance())
-                    ?:throwToast("failed to find context")
+                activity?.let {
+                   val  bindingMain = ActivityMainBinding.bind((it.findViewById(android.R.id.content)))
+                    parentFragmentManager.beginTransaction()
+                        .add(bindingMain.containerMain.id, FragmentAddAnimal.newInstance(), TAG)
+                        .commit()
+                }
             }
 
 
@@ -55,9 +59,6 @@ class FragmentAnimals : Fragment(), ClickDelegate {
     override fun onAnimalClick(id: Int) {
     }
 
-    private fun throwToast(message: String){
-        Toast.makeText(requireContext(),message,Toast.LENGTH_SHORT).show()
-    }
 
     companion object{
 
