@@ -12,26 +12,45 @@ import dev.lynko.domain.usecases.GetAllAnimalsUseCase
 import dev.lynko.domain.usecases.GetFlowAnimalsUseCase
 import dev.lynko.domain.usecases.InsertAnimalUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class AnimalsViewModel(
+class AnimalsViewModel @Inject constructor(
     private val getAnimalUseCase: GetAllAnimalsUseCase,
     private val getFlowAnimalUseCase: GetFlowAnimalsUseCase,
     private val insertAnimalUseCase: InsertAnimalUseCase,
     private val accountId: Int
     ): ViewModel() {
 
-    private val _state: MutableLiveData<ValidateState> = MutableLiveData(ValidateState.DEFAULT)
-    val state: LiveData<ValidateState> = _state
+    private val _state: MutableStateFlow<ValidateState> = MutableStateFlow(ValidateState.DEFAULT)
+    val state: StateFlow<ValidateState> = _state
 
-    val animals: StateFlow<List<Animal>> = getFlowAnimalUseCase.execute().stateIn(
+
+    val animals: SharedFlow<List<Animal>> = getFlowAnimalUseCase.execute().shareIn(
+        scope = viewModelScope,
+        started = SharingStarted.Eagerly,
+        replay = 1
+    )
+
+    //  1 4 6 12 64 34
+
+//    sub1 (1, 4, 6, 12, 64, 34)
+                        //sub 2 (4, 6, 12, 64, 34)
+                                                //    sub3(12 64 34)
+
+//    val animals: StateFlow<List<Animal>> = getFlowAnimalUseCase.execute().stateIn(
+//        scope = viewModelScope,
+//        started = SharingStarted.Eagerly,
+//        listOf()
+//    )
+
+
+       /* .stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
         initialValue = listOf()
-    )
+    )*/
 
     fun insertAnimal(name: String, age: String, weight: String, type: Byte) {
         val animal = isDataValid(name, age, weight, type) ?: return

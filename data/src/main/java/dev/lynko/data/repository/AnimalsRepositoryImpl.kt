@@ -36,5 +36,8 @@ class AnimalsRepositoryImpl(
         return animalsDao.getAllFlow().flatMapConcat { list ->
             flowOf(list.map { it.toAnimal() })
         }
+//        transform { list ->
+//            list.map { it.toAnimal() }
+//        }
     }
 }

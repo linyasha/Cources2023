@@ -17,11 +17,11 @@ class MyAnimalsApp: Application() {
 
     override fun onCreate() {
         super.onCreate()
-        startKoin {
-            androidContext(this@MyAnimalsApp)
-            androidLogger(Level.INFO)
-            modules(dataModule, presentationModule, domainModule)
-        }
+//        startKoin {
+//            androidContext(this@MyAnimalsApp)
+//            androidLogger(Level.INFO)
+//            modules(dataModule, presentationModule, domainModule)
+//        }
         INSTANCE = this
 
     }

@@ -39,19 +39,19 @@ class AnimalsActivity : AppCompatActivity(), KoinComponent {
                 Log.d("HAHAH", "observe: $animals ")
                 binding.result.setText(animals.toString())
             }
-        }
-        viewModel.state.observe(this) { status ->
-            with(binding) {
-                when(status) {
-                    ValidateState.SUCCESS -> {
-                        nameEditText.setText("")
-                        ageEditText.setText("")
-                        weightEditText.setText("")
+            viewModel.state.collectLatest { status ->
+                with(binding) {
+                    when(status) {
+                        ValidateState.SUCCESS -> {
+                            nameEditText.setText("")
+                            ageEditText.setText("")
+                            weightEditText.setText("")
+                        }
+                        ValidateState.FAIL -> {
+                            Toast.makeText(this@AnimalsActivity, "Check data!", Toast.LENGTH_SHORT).show()
+                        }
+                        ValidateState.DEFAULT -> {}
                     }
-                    ValidateState.FAIL -> {
-                        Toast.makeText(this@AnimalsActivity, "Check data!", Toast.LENGTH_SHORT).show()
-                    }
-                    ValidateState.DEFAULT -> {}
                 }
             }
         }
@@ -64,6 +64,8 @@ class AnimalsActivity : AppCompatActivity(), KoinComponent {
                     Animal.TYPE_CAT
                 )
             }
+
+//            viewModel.animals.replayCache.lastOrNull()
         }
     }
 }
