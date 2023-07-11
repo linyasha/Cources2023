@@ -1,18 +1,28 @@
 package dev.lynko.cources2023.di
 
-import dev.lynko.cources2023.ui.viewModel.AnimalsViewModel
-import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.module
+import android.content.Context
+import dagger.Module
+import dagger.Provides
+import dev.lynko.cources2023.ui.viewModel.AnimalsViewModelFactory
+import dev.lynko.domain.usecases.GetAllAnimalsUseCase
+import dev.lynko.domain.usecases.GetFlowAnimalsUseCase
+import dev.lynko.domain.usecases.InsertAnimalUseCase
 
-val presentationModule = module {
+@Module
+class PresentationModule(val context: Context) {
 
-    viewModel<AnimalsViewModel> { (accountId: Int) ->
-        AnimalsViewModel(
-            getAnimalUseCase = get(),
-            getFlowAnimalUseCase = get(),
-            insertAnimalUseCase = get(),
-            accountId = accountId
-        )
+    @Provides
+    fun provideContext(): Context {
+        return context
     }
+
+//    @Provides
+//    fun provideAnimalsViewModelFactory(
+//        getAnimalUseCase: GetAllAnimalsUseCase,
+//        getFlowAnimalUseCase: GetFlowAnimalsUseCase,
+//        insertAnimalUseCase: InsertAnimalUseCase
+//    ): AnimalsViewModelFactory {
+//        return AnimalsViewModelFactory(getAnimalUseCase, getFlowAnimalUseCase, insertAnimalUseCase)
+//    }
 
 }

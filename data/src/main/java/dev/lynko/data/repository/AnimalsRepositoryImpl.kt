@@ -9,8 +9,10 @@ import dev.lynko.domain.models.Animal
 import dev.lynko.domain.repository.AnimalsRepository
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
+import javax.inject.Singleton
 import kotlin.math.log
 
+@Singleton
 class AnimalsRepositoryImpl(
     private val animalsDao: AnimalsDao,
     private val context: Context
@@ -32,7 +34,7 @@ class AnimalsRepositoryImpl(
     }
 
     override fun getAllAnimasFlow(): Flow<List<Animal>> {
-        Log.d("ABC", "getAllAnimasFlow: $context")
+//        Log.d("ABC", "getAllAnimasFlow: $context")
         return animalsDao.getAllFlow().flatMapConcat { list ->
             flowOf(list.map { it.toAnimal() })
         }
