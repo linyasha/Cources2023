@@ -1,13 +1,13 @@
 package dev.lynko.cources2023.di
 
-import android.content.Context
 import dev.lynko.cources2023.MyAnimalsApp
-import dev.lynko.data.repository.AnimalsRepositoryImpl
+import dev.lynko.data.local.repository.AnimalsRepositoryImpl
 import dev.lynko.domain.repository.AnimalsRepository
-import dev.lynko.domain.usecases.GetAllAnimalsUseCase
-import dev.lynko.domain.usecases.GetFlowAnimalsUseCase
-import dev.lynko.domain.usecases.InsertAnimalUseCase
-import org.koin.android.ext.koin.androidApplication
+import dev.lynko.domain.usecases.animals.GetAllAnimalsUseCase
+import dev.lynko.domain.usecases.animals.GetFlowAnimalsUseCase
+import dev.lynko.domain.usecases.animals.InsertAnimalUseCase
+import dev.lynko.domain.usecases.user.LoginUserUseCase
+import dev.lynko.domain.usecases.user.RegistrationUserUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 
@@ -31,10 +31,15 @@ val domainModule = module {
         )
     }
 
-    single<AnimalsRepository> {
-        AnimalsRepositoryImpl(
-            animalsDao = MyAnimalsApp.INSTANCE.database.animalsDao(),
-            context = androidContext()
+    factory<LoginUserUseCase> {
+        LoginUserUseCase(
+            authRepository = get()
+        )
+    }
+
+    factory<RegistrationUserUseCase> {
+        RegistrationUserUseCase(
+            authRepository = get()
         )
     }
 

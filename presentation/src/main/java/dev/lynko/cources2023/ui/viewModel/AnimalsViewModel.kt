@@ -3,14 +3,12 @@ package dev.lynko.cources2023.ui.viewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import dev.lynko.cources2023.ui.model.ValidateState
 import dev.lynko.domain.models.Animal
-import dev.lynko.domain.repository.AnimalsRepository
-import dev.lynko.domain.usecases.GetAllAnimalsUseCase
-import dev.lynko.domain.usecases.GetFlowAnimalsUseCase
-import dev.lynko.domain.usecases.InsertAnimalUseCase
+import dev.lynko.domain.usecases.animals.GetAllAnimalsUseCase
+import dev.lynko.domain.usecases.animals.GetFlowAnimalsUseCase
+import dev.lynko.domain.usecases.animals.InsertAnimalUseCase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -20,8 +18,7 @@ import kotlinx.coroutines.launch
 class AnimalsViewModel(
     private val getAnimalUseCase: GetAllAnimalsUseCase,
     private val getFlowAnimalUseCase: GetFlowAnimalsUseCase,
-    private val insertAnimalUseCase: InsertAnimalUseCase,
-    private val accountId: Int
+    private val insertAnimalUseCase: InsertAnimalUseCase
     ): ViewModel() {
 
     private val _state: MutableLiveData<ValidateState> = MutableLiveData(ValidateState.DEFAULT)

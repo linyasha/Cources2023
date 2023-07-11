@@ -16,6 +16,7 @@ import dev.lynko.domain.models.Animal
 
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import org.koin.android.compat.ViewModelCompat.viewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.parameter.parametersOf
@@ -24,10 +25,7 @@ import org.koin.core.parameter.parametersOf
 class AnimalsActivity : AppCompatActivity(), KoinComponent {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: AnimalsViewModel by viewModel {
-        val accountId = intent.extras?.getInt("KEY_ACCOUNT_ID", 0)
-        parametersOf(accountId)
-    }
+    private val viewModel: AnimalsViewModel by viewModel()
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {

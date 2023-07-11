@@ -1,8 +1,8 @@
-package dev.lynko.data.dao
+package dev.lynko.data.local.dao
 
 
 import androidx.room.*
-import dev.lynko.data.model.AnimalModel
+import dev.lynko.data.local.model.AnimalModel
 import kotlinx.coroutines.flow.Flow
 
 @Dao

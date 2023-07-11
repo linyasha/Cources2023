@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -62,6 +63,12 @@ dependencies {
     //Koin
     implementation("io.insert-koin:koin-core:3.4.2")
     implementation ("io.insert-koin:koin-android-compat:3.4.2")
+
+    //Firebase
+    implementation platform('com.google.firebase:firebase-bom:32.1.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    //Auth
+    implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
 
 
 }

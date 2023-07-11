@@ -1,10 +1,10 @@
-package dev.lynko.data.repository
+package dev.lynko.data.local.repository
 
 
 import android.content.Context
 import android.util.Log
-import dev.lynko.data.dao.AnimalsDao
-import dev.lynko.data.model.AnimalModel
+import dev.lynko.data.local.dao.AnimalsDao
+import dev.lynko.data.local.model.AnimalModel
 import dev.lynko.domain.models.Animal
 import dev.lynko.domain.repository.AnimalsRepository
 import kotlinx.coroutines.*

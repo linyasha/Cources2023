@@ -6,12 +6,11 @@ import org.koin.dsl.module
 
 val presentationModule = module {
 
-    viewModel<AnimalsViewModel> { (accountId: Int) ->
+    viewModel<AnimalsViewModel> {
         AnimalsViewModel(
             getAnimalUseCase = get(),
             getFlowAnimalUseCase = get(),
-            insertAnimalUseCase = get(),
-            accountId = accountId
+            insertAnimalUseCase = get()
         )
     }
 

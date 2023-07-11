@@ -1,11 +1,11 @@
-package dev.lynko.data.database
+package dev.lynko.data.local.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import dev.lynko.data.dao.AnimalsDao
-import dev.lynko.data.model.AnimalModel
+import dev.lynko.data.local.dao.AnimalsDao
+import dev.lynko.data.local.model.AnimalModel
 
 @Database(
     entities = [AnimalModel::class],
