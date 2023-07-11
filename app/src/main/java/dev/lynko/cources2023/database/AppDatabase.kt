@@ -6,6 +6,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.migration.AutoMigrationSpec
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import dev.lynko.cources2023.database.dao.AnimalsDao
 import dev.lynko.cources2023.model.Animal
 
@@ -19,7 +21,7 @@ abstract class AppDatabase: RoomDatabase() {
 
     companion object {
 
-        const val DATABASE_VERSION = 1
+        const val DATABASE_VERSION = 2
         const val DATABASE_NAME = "my_animals"
 
         private var INSTANCE: AppDatabase? = null
@@ -32,10 +34,18 @@ abstract class AppDatabase: RoomDatabase() {
                     context,
                     AppDatabase::class.java,
                     DATABASE_NAME
-                ).build()
+                ).addMigrations(MIGRATION_1_2)
+                    .build()
                 INSTANCE = instance
                 instance
             }
         }
+
+        val MIGRATION_1_2 = object : Migration(1, 2) {
+            override fun migrate(database: SupportSQLiteDatabase) {
+                database.execSQL("ALTER TABLE animal ADD COLUMN description123 TEXT NOT NULL DEFAULT ''")
+            }
+        }
+
     }
 }

@@ -13,8 +13,9 @@ data class Animal(
     val age: Int,
 //    @ColumnInfo(name = "w")
     val weight: Double,
-    //TODO("Добавьте поле description, которое будет содержать описание питомца")
-    //TODO("Добавьте поле createdAt, которое будет равно времени создания питомца(System.currentTimeMillis)")
+    val description: String,
+    val description123: String,
+    val createdAt: Long = System.currentTimeMillis(),
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0
 ) {

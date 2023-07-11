@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import kotlin.random.Random
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), AnimalsFragment.onAddAnimal {
 
     private lateinit var binding: ActivityMainBinding
 
@@ -59,13 +59,11 @@ class MainActivity : AppCompatActivity() {
                     textVar.toDouble()
                 }
                 val type = Animal.TYPE_CAT
-//              TODO("Поменяйте на lifecycleScope")
                 GlobalScope.launch(Dispatchers.IO) {
-                    animalsRepository.insertAnimal(Animal(type, name, age, weight))
+                    animalsRepository.insertAnimal(Animal(type, name, age, weight, "Good", "sdfsdfgsd"))
                 }
 
             }
-            //TODO("Поменяйте на lifecycleScope")
             GlobalScope.launch(Dispatchers.IO) {
                 val animals = animalsRepository.getAllAnimas()
                 withContext(Dispatchers.Main) {
@@ -76,5 +74,13 @@ class MainActivity : AppCompatActivity() {
             }
 
         }
+    }
+
+    fun transactionToAddAnimal() {
+//                supportFragmentManager.beginTransaction()
+    }
+
+    override fun addAnimal() {
+//        supportFragmentManager.beginTransaction()
     }
 }
