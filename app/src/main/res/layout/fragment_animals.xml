@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    >
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/gradient_background"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="3dp"
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:src="@android:drawable/ic_input_add"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:tint="#596dc5"/>
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="38dp"
+        android:layout_height="29dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/baseline_settings_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="30dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="16dp"
+        android:src="?attr/homeAsUpIndicator"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="409dp"
+        android:layout_height="598dp"
+        tools:layout_editor_absoluteX="1dp"
+        tools:layout_editor_absoluteY="60dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:listitem="@layout/item_animal"
+        tools:itemCount="6"/>
+
+    <TextView
+        android:id="@+id/animalDataBase"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="@string/animal_database"
+        android:textSize="20sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageView4"
+        tools:layout_editor_absoluteX="45dp"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/white"/>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

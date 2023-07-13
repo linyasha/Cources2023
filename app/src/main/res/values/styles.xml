@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="MyTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="boxStrokeErrorColor">@color/purple_200</item>
+        <item name="boxStrokeColor">#16ff9d</item>
+
+    </style>
+</resources>

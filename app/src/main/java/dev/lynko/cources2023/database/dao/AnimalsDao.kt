@@ -1,5 +1,6 @@
 package dev.lynko.cources2023.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import dev.lynko.cources2023.model.Animal
 
@@ -8,6 +9,9 @@ interface AnimalsDao {
 
     @Query("SELECT * FROM animal")
     fun getAll(): List<Animal>
+
+    @Query("SELECT * FROM animal")
+    fun getAllLiveData(): LiveData<List<Animal>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(animal: Animal)
