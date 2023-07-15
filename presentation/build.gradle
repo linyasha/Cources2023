@@ -69,6 +69,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     //Auth
     implementation 'com.google.firebase:firebase-auth-ktx:22.0.0'
+    //FCM
+    implementation 'com.google.firebase:firebase-messaging'
 
 
 }
