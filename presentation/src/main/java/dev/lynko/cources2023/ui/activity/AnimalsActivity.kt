@@ -10,14 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import dev.lynko.cources2023.MyAnimalsApp
 import dev.lynko.cources2023.databinding.ActivityMainBinding
 import dev.lynko.cources2023.ui.model.ValidateState
-
 import dev.lynko.cources2023.ui.viewModel.AnimalsViewModel
 import dev.lynko.domain.models.Animal
-
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import org.koin.android.compat.ViewModelCompat.viewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.parameter.parametersOf
 
@@ -25,6 +22,7 @@ import org.koin.core.parameter.parametersOf
 class AnimalsActivity : AppCompatActivity(), KoinComponent {
 
     private lateinit var binding: ActivityMainBinding
+
     private val viewModel: AnimalsViewModel by viewModel()
 
     @SuppressLint("MissingInflatedId")

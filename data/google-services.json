@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "493253064112",
+    "project_id": "itacademy-f3edb",
+    "storage_bucket": "itacademy-f3edb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493253064112:android:8c6109ab3a39c4e5599275",
+        "android_client_info": {
+          "package_name": "dev.lynko.data"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "493253064112-vrfejhr3cck3ij22fm8qt2hu2oaqoji4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDBHpwXFbcN5xcPZ-11Jl4o5Cik0sjLZ48"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "493253064112-vrfejhr3cck3ij22fm8qt2hu2oaqoji4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
