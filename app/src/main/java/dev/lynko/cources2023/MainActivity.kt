@@ -31,7 +31,6 @@ import java.net.URL
 //https://api.nasa.gov/planetary/apod?api_key=zUTcPX0Ac65Zo8gLnVv7qwimBbz67fwo1k7WINXw
 private const val ENDPOINT = "https://api.nasa.gov"
 private const val BOOKS_URI = "/planetary/apod?"
-private const val API_KEY = "api_key=zUTcPX0Ac65Zo8gLnVv7qwimBbz67fwo1k7WINXw"
 private const val TITLE = "title"
 
 
