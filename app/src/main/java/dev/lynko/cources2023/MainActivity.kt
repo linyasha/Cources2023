@@ -23,9 +23,15 @@ import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
+//TODO("Wifi localhost")
+//private const val ENDPOINT = "http://192.168.100.3:3000"
 
-private const val ENDPOINT = "http://"
-private const val BOOKS_URI = "/books"
+
+
+//https://api.nasa.gov/planetary/apod?api_key=zUTcPX0Ac65Zo8gLnVv7qwimBbz67fwo1k7WINXw
+private const val ENDPOINT = "https://api.nasa.gov"
+private const val BOOKS_URI = "/planetary/apod?"
+private const val API_KEY = "api_key=zUTcPX0Ac65Zo8gLnVv7qwimBbz67fwo1k7WINXw"
 private const val TITLE = "title"
 
 
@@ -52,14 +58,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     suspend fun getBooksAndShowIt() {
-        val httpUrlConnection = URL(ENDPOINT + BOOKS_URI).openConnection() as HttpURLConnection
+        val httpUrlConnection = URL(ENDPOINT + BOOKS_URI + API_KEY).openConnection() as HttpURLConnection
         httpUrlConnection.apply {
             connectTimeout = 10000 // 10 seconds
             requestMethod = "GET"
             doInput = true
         }
         if (httpUrlConnection.responseCode != HttpURLConnection.HTTP_OK) {
-            // show error toast
+            withContext(Dispatchers.Main) {
+                //Toast.makeText
+            }
             return
         }
         val streamReader = InputStreamReader(httpUrlConnection.inputStream)
@@ -67,24 +75,28 @@ class MainActivity : AppCompatActivity() {
         streamReader.use {
             text = it.readText()
         }
-
         val books = mutableListOf<String>()
-        val json = JSONArray(text)
-        for (i in 0 until json.length()) {
-            val jsonBook = json.getJSONObject(i)
-            val title = jsonBook.getString(TITLE)
-            books.add(title)
-        }
+        val json = JSONObject(text)
+        val title = json.getString(TITLE)
+//        for (i in 0 until json.length()) {
+//            val jsonBook = json.getJSONObject(i)
+//            val title = jsonBook.getString(TITLE)
+//            books.add(title)
+//        }
         httpUrlConnection.disconnect()
 
         withContext(Dispatchers.Main) {
-            binding.textView.text = books.reduce { acc, s -> "$acc\n$s" }
+            binding.textView.text = title
         }
     }
 
     suspend fun addBook(book: String) {
         val httpUrlConnection = URL(ENDPOINT + BOOKS_URI).openConnection() as HttpURLConnection
         val body = JSONObject().apply {
+            put(TITLE, book)
+            put(TITLE, book)
+            put(TITLE, book)
+            put(TITLE, book)
             put(TITLE, book)
         }
         httpUrlConnection.apply {
@@ -97,7 +109,11 @@ class MainActivity : AppCompatActivity() {
             it.write(body.toString())
         }
         httpUrlConnection.responseCode
-        httpUrlConnection.disconnect()
-        getBooksAndShowIt()
+        if (httpUrlConnection.responseCode != HttpURLConnection.HTTP_OK) {
+
+        } else {
+            httpUrlConnection.disconnect()
+            getBooksAndShowIt()
+        }
     }
 }
