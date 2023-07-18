@@ -15,6 +15,8 @@ interface NasaApi{
     @GET("planetary/apod?api_key=$API_KEY")
     suspend fun getPlanetary(): ApiData
 
+
+
     @GET("DONKI/FLR?startDate=yyyy-MM-dd&endDate=yyyy-MM-dd&api_key=$API_KEY ")
     suspend fun someOther(): ApiData
 //    suspend fun getPlanetary(): Response<RequestBody>
