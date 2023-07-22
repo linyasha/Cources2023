@@ -1,4 +1,4 @@
-package dev.lynko.cources2023
+package dev.lynko.cources2023.ui
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     suspend fun getBooksAndShowIt() {
-        val httpUrlConnection = URL(ENDPOINT + BOOKS_URI + API_KEY).openConnection() as HttpURLConnection
+        val httpUrlConnection = URL(ENDPOINT + BOOKS_URI).openConnection() as HttpURLConnection
         httpUrlConnection.apply {
             connectTimeout = 10000 // 10 seconds
             requestMethod = "GET"
