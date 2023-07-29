@@ -22,6 +22,20 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            versionNameSuffix "-DEBUG"
+        }
+    }
+    flavorDimensions "version"
+    productFlavors {
+        free {
+            dimension "version"
+            applicationIdSuffix ".free"
+        }
+        premium {
+            dimension "version"
+            applicationIdSuffix ".premium"
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -36,13 +50,17 @@ android {
     }
 }
 
+ext {
+    junit_version = '1.1.5'
+}
+
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation "androidx.core:core-ktx:$core_ktx_version"
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation Dependencies.MATERIAL_FULL
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+    androidTestImplementation "androidx.test.ext:junit:$junit_version"
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 }

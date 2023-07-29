@@ -1,3 +1,4 @@
 <resources>
-    <string name="app_name">Cources2023</string>
+    <string name="app_name">Cources 2023 Main</string>
+    <string name="some_string">Hello Main</string>
 </resources>
