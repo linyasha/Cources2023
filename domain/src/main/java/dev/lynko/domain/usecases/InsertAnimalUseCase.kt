@@ -5,7 +5,10 @@ import dev.lynko.domain.repository.AnimalsRepository
 
 class InsertAnimalUseCase(private val animalsRepository: AnimalsRepository) {
 
-    suspend fun execute(animal: Animal) {
+    suspend fun execute(animal: Animal): Boolean {
+        if (animalsRepository.getAllAnimas().contains(animal)) {
+            return false
+        }
         return animalsRepository.insertAnimal(animal)
     }
 

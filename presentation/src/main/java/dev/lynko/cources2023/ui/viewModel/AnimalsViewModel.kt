@@ -12,9 +12,7 @@ import dev.lynko.domain.usecases.GetAllAnimalsUseCase
 import dev.lynko.domain.usecases.GetFlowAnimalsUseCase
 import dev.lynko.domain.usecases.InsertAnimalUseCase
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class AnimalsViewModel(
@@ -27,17 +25,15 @@ class AnimalsViewModel(
     private val _state: MutableLiveData<ValidateState> = MutableLiveData(ValidateState.DEFAULT)
     val state: LiveData<ValidateState> = _state
 
-    val animals: StateFlow<List<Animal>> = getFlowAnimalUseCase.execute().stateIn(
+    val animals: StateFlow<List<Animal>> = emptyFlow<List<Animal>>().stateIn(
         scope = viewModelScope,
         started = SharingStarted.Eagerly,
         initialValue = listOf()
     )
 
-    fun insertAnimal(name: String, age: String, weight: String, type: Byte) {
+    suspend fun insertAnimal(name: String, age: String, weight: String, type: Byte) {
         val animal = isDataValid(name, age, weight, type) ?: return
-        viewModelScope.launch(Dispatchers.IO) {
-            insertAnimalUseCase.execute(animal)
-        }
+        insertAnimalUseCase.execute(animal)
     }
 
     fun getAllAnimals() {

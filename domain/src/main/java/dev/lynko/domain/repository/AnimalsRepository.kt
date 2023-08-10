@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface AnimalsRepository {
 
-    suspend fun insertAnimal(animal: Animal)
+    suspend fun insertAnimal(animal: Animal): Boolean
     suspend fun getAllAnimas(): List<Animal>
     fun getAllAnimasFlow(): Flow<List<Animal>>
 }

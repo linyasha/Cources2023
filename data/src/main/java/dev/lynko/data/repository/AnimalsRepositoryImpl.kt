@@ -19,10 +19,11 @@ class AnimalsRepositoryImpl(
     private val job = SupervisorJob()
     private val animalsScope = CoroutineScope(job + Dispatchers.IO)
 
-    override suspend fun insertAnimal(animal: Animal) {
-        animalsScope.launch {
+    override suspend fun insertAnimal(animal: Animal): Boolean {
+        animalsScope.async {
             animalsDao.insert(AnimalModel.map(animal))
-        }
+        }.await()
+        return true
     }
 
     override suspend fun getAllAnimas(): List<Animal> {

@@ -13,6 +13,7 @@ import dev.lynko.cources2023.ui.model.ValidateState
 
 import dev.lynko.cources2023.ui.viewModel.AnimalsViewModel
 import dev.lynko.domain.models.Animal
+import kotlinx.coroutines.Dispatchers
 
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -57,12 +58,14 @@ class AnimalsActivity : AppCompatActivity(), KoinComponent {
         }
         with(binding) {
             add.setOnClickListener {
-                viewModel.insertAnimal(
-                    nameEditText.text.toString(),
-                    ageEditText.text.toString(),
-                    weightEditText.text.toString(),
-                    Animal.TYPE_CAT
-                )
+                lifecycleScope.launch(Dispatchers.IO) {
+                    viewModel.insertAnimal(
+                        nameEditText.text.toString(),
+                        ageEditText.text.toString(),
+                        weightEditText.text.toString(),
+                        Animal.TYPE_CAT
+                    )
+                }
             }
         }
     }
