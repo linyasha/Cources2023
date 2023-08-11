@@ -1,6 +1,10 @@
 package dev.lynko.cources2023
 
 import android.app.Application
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.os.Build
 import dev.lynko.cources2023.di.dataModule
 import dev.lynko.cources2023.di.domainModule
 import dev.lynko.cources2023.di.presentationModule
@@ -23,6 +27,16 @@ class MyAnimalsApp: Application() {
             modules(dataModule, presentationModule, domainModule)
         }
         INSTANCE = this
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+            val channel = NotificationChannel(
+                "my_channel",
+                "Animals",
+                NotificationManager.IMPORTANCE_HIGH
+            )
+            channel.description = "Some information from firebase"
+            val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
 
     }
 
