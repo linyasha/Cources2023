@@ -16,11 +16,14 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.work.*
 import dev.lynko.cources2023.*
 import dev.lynko.cources2023.databinding.ActivityMainBinding
 import dev.lynko.cources2023.ui.model.ValidateState
 
 import dev.lynko.cources2023.ui.viewModel.AnimalsViewModel
+import dev.lynko.cources2023.workManager.work.LoadWorker
+import dev.lynko.cources2023.workManager.work.NotifyWorker
 import dev.lynko.domain.models.Animal
 import kotlinx.coroutines.delay
 
@@ -29,15 +32,12 @@ import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.component.KoinComponent
 import org.koin.core.parameter.parametersOf
+import java.util.concurrent.TimeUnit
 
 
 class AnimalsActivity : AppCompatActivity(), KoinComponent {
 
     private lateinit var binding: ActivityMainBinding
-    private val viewModel: AnimalsViewModel by viewModel {
-        val accountId = intent.extras?.getInt("KEY_ACCOUNT_ID", 0)
-        parametersOf(accountId)
-    }
 
     var listener: MyForegroundBoundedService.MyBinder? = null
 
@@ -64,37 +64,6 @@ class AnimalsActivity : AppCompatActivity(), KoinComponent {
                 12
             )
         }
-//        lifecycleScope.launch {
-//            viewModel.animals.collectLatest { animals ->
-//                Log.d("HAHAH", "observe: $animals ")
-//                binding.result.setText(animals.toString())
-//            }
-//        }
-//        viewModel.state.observe(this) { status ->
-//            with(binding) {
-//                when(status) {
-//                    ValidateState.SUCCESS -> {
-//                        nameEditText.setText("")
-//                        ageEditText.setText("")
-//                        weightEditText.setText("")
-//                    }
-//                    ValidateState.FAIL -> {
-//                        Toast.makeText(this@AnimalsActivity, "Check data!", Toast.LENGTH_SHORT).show()
-//                    }
-//                    ValidateState.DEFAULT -> {}
-//                }
-//            }
-//        }
-//        with(binding) {
-//            add.setOnClickListener {
-//                viewModel.insertAnimal(
-//                    nameEditText.text.toString(),
-//                    ageEditText.text.toString(),
-//                    weightEditText.text.toString(),
-//                    Animal.TYPE_CAT
-//                )
-//            }
-//        }
         var count = 0
         binding.back.setOnClickListener {
             startService(
@@ -116,7 +85,7 @@ class AnimalsActivity : AppCompatActivity(), KoinComponent {
             val intent = Intent(this, MyForegroundBoundedService::class.java).apply {
                 putExtra("KEY", "$count")
             }
-            startService(intent)
+//            startService(intent)
             bindService(intent, connectionBounded, Context.BIND_AUTO_CREATE)
         }
         binding.boundStop.setOnClickListener {
@@ -125,14 +94,77 @@ class AnimalsActivity : AppCompatActivity(), KoinComponent {
         binding.boundWork.setOnClickListener {
             listener?.startWork()
         }
+
+        binding.startWorkManager.setOnClickListener {
+            // 1
+//            val uploadRequest = OneTimeWorkRequest.from(LoadWorker::class.java)
+//            val operation = WorkManager.getInstance(this)
+//                .enqueue(uploadRequest)
+//
+//            Log.d("WorkManagerTest", "operation result: ${operation.result}")
+//            operation.state.observe(this) {
+//                Log.d("WorkManagerTest", "state liveData: ${it.toString()}")
+//            }
+
+            // 2
+//            val uploadRequest = OneTimeWorkRequest.from(LoadWorker::class.java)
+//            WorkManager.getInstance(this)
+//                .enqueueUniqueWork(
+//                    "uploadWork",
+//                    ExistingWorkPolicy.APPEND,
+//                    uploadRequest,
+//                )
+
+            // 3
+//            val uploadRequest = OneTimeWorkRequest.from(LoadWorker::class.java)
+//            val notifyRequest = OneTimeWorkRequest.from(NotifyWorker::class.java)
+//            WorkManager.getInstance(this)
+//                .beginUniqueWork(
+//                    "uploadWork",
+//                    ExistingWorkPolicy.REPLACE,
+//                    uploadRequest,
+//                )
+//                .then(notifyRequest)
+//                .enqueue()
+
+            // 4
+//            val uploadRequest = OneTimeWorkRequest.from(LoadWorker::class.java)
+//            val notifyRequest = OneTimeWorkRequestBuilder<NotifyWorker>()
+//                .setConstraints(
+//                    Constraints.Builder()
+//                        .setRequiredNetworkType(NetworkType.CONNECTED)
+//                        .build()
+//                )
+//                .build()
+//
+//            WorkManager.getInstance(this)
+//                .beginUniqueWork(
+//                    "uploadWork",
+//                    ExistingWorkPolicy.REPLACE,
+//                    uploadRequest,
+//                )
+//                .then(notifyRequest)
+//                .enqueue()
+
+            // 5
+//            val uploadRequest =
+//                PeriodicWorkRequestBuilder<LoadWorker>(15, TimeUnit.MINUTES)
+//                    .build()
+//
+//            WorkManager.getInstance(this)
+//                .enqueueUniquePeriodicWork(
+//                    "uploadWork",
+//                    ExistingPeriodicWorkPolicy.KEEP,
+//                    uploadRequest
+//                )
+        }
     }
 
-    override fun onResume() {
-        super.onResume()
-    }
 
     override fun onDestroy() {
         super.onDestroy()
-//        unbindService(connectionBounded)
+        listener?.let {
+            unbindService(connectionBounded)
+        }
     }
 }
