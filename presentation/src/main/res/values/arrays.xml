@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="theme_keys_q">
+        <item>System</item>
+        <item>Dark</item>
+        <item>Light</item>
+    </string-array>
+    <string-array name="theme_values_q">
+        <item>system</item>
+        <item>dark</item>
+        <item>light</item>
+    </string-array>
+    <string-array name="theme_keys">
+        <item>Dark</item>
+        <item>Light</item>
+    </string-array>
+    <string-array name="theme_values">
+        <item>dark</item>
+        <item>light</item>
+    </string-array>
+    <string-array name="status">
+        <item>Active</item>
+        <item>Inactive</item>
+    </string-array>
+    <string-array name="time">
+        <item>Off</item>
+        <item>30 seconds</item>
+        <item>1 minute</item>
+        <item>5 minutes</item>
+        <item>1 hour</item>
+        <item>6 hours</item>
+        <item>1 day</item>
+    </string-array>
+    <string-array name="internal_storage">
+        <item>images</item>
+        <item>videos</item>
+        <item>audio</item>
+        <item>files</item>
+    </string-array>
+
+</resources>

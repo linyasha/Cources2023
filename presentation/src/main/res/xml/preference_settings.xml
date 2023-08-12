@@ -5,9 +5,10 @@
         android:title="General">
 
         <ListPreference
-            android:key="theme"
+            android:key="@string/theme"
             android:title="Theme"
-            android:summary="%s" />
+            android:entries="@array/theme_keys"
+            android:entryValues="@array/theme_values"/>
 
         <SwitchPreferenceCompat
             android:defaultValue="true"
@@ -30,6 +31,5 @@
 
 
     </PreferenceCategory>
-
 
 </PreferenceScreen>

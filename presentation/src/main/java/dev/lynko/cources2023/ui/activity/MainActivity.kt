@@ -12,6 +12,8 @@ import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import com.pawegio.kandroid.defaultSharedPreferences
+import dev.lynko.cources2023.Prefs
 import dev.lynko.cources2023.R
 import dev.lynko.cources2023.databinding.ActivityMain2Binding
 import kotlinx.coroutines.launch
@@ -82,7 +84,7 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launch {
             Glide.with(this@MainActivity).load(images.first().uri).centerCrop().into(binding.photo)
         }
-
+        defaultSharedPreferences.getString(Prefs.KEY_THEME, "")
     }
 
     data class Image(
